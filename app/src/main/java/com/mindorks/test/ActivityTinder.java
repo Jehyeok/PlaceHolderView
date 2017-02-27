@@ -38,16 +38,16 @@ public class ActivityTinder extends AppCompatActivity {
             public void onItemRemoved(int count) {
                 Log.d(TAG, "onItemRemoved: " + count);
                 if(count == 0){
-                    mSwipView.addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard())
-                            .addView(new TinderCard());
+                    mSwipView.addView(new TinderCard("hi1"))
+                        .addView(new TinderCard("hi2"))
+                        .addView(new TinderCard("hi3"))
+                        .addView(new TinderCard("hi4"))
+                        .addView(new TinderCard("hi5"))
+                        .addView(new TinderCard("hi6"))
+                        .addView(new TinderCard("hi7"))
+                        .addView(new TinderCard("hi8"))
+                        .addView(new TinderCard("hi9"))
+                        .addView(new TinderCard("hi10"));
                 }
             }
         });
@@ -67,16 +67,16 @@ public class ActivityTinder extends AppCompatActivity {
                         .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
                         .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
 
-        mSwipView.addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard())
-                .addView(new TinderCard());
+        mSwipView.addView(new TinderCard("hi1"))
+                .addView(new TinderCard("hi2"))
+                .addView(new TinderCard("hi3"))
+                .addView(new TinderCard("hi4"))
+                .addView(new TinderCard("hi5"))
+                .addView(new TinderCard("hi6"))
+                .addView(new TinderCard("hi7"))
+                .addView(new TinderCard("hi8"))
+                .addView(new TinderCard("hi9"))
+                .addView(new TinderCard("hi10"));
         new Thread(new Runnable(){
             @Override
             public void run() {

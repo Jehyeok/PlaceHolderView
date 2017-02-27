@@ -36,6 +36,7 @@ import com.mindorks.test.Utils;
 public class TinderCard {
 
     private static int count;
+    private final String text;
 
     @View(R.id.profileImageView)
     private ImageView profileImageView;
@@ -46,6 +47,10 @@ public class TinderCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
+    public TinderCard(String hi) {
+        this.text = hi;
+    }
+
     @Click(R.id.profileImageView)
     private void onClick(){
         Log.d("DEBUG", "profileImageView");
@@ -53,7 +58,7 @@ public class TinderCard {
 
     @Resolve
     private void onResolve(){
-        nameAgeTxt.setText("Name " + count++);
+        nameAgeTxt.setText("Name " + text);
     }
 
     @SwipeOut

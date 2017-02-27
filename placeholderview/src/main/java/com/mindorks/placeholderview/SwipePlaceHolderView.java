@@ -620,14 +620,19 @@ public class SwipePlaceHolderView extends FrameLayout implements
 
     public void undoLastSwipe(){
         if(mIsUndoEnabled && mRestoreSwipeViewBinderList.size() != 0){
-            if(mSwipeViewBinderList.size() >= mDisplayViewCount - 1) {
+            if(mSwipeViewBinderList.size() > mDisplayViewCount - 1){
                 removeViewAt(mDisplayViewCount - 1);
             }
-            addView(mRestoreSwipeViewBinderList.get(mRestoreSwipeViewBinderList.size() - 1).getResolver(), 0);
+
+            int lastSwipeItemIdx = mRestoreSwipeViewBinderList.size() - 1;
+
+            addView(mRestoreSwipeViewBinderList.get(lastSwipeItemIdx).getResolver(), 0);
+            mRestoreSwipeViewBinderList.remove(lastSwipeItemIdx);
+
             if(mSwipeViewBinderList.size() > 1){
                 mSwipeViewBinderList.get(1).blockTouch();
             }
-            if(mSwipeViewBinderList.size() >= mDisplayViewCount - 1){
+            if(mSwipeViewBinderList.size() > mDisplayViewCount - 1){
                 resetViewOrientation(mDisplayViewCount - 1, mSwipeDecor);
             }
         }
