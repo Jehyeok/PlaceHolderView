@@ -443,7 +443,7 @@ public class SwipePlaceHolderView extends FrameLayout implements
             mRestoreResolverOnUndo = swipeViewBinder.getResolver();
             mRestoreResolverPosition = position;
         }
-        swipeViewBinder.unbind();
+//        swipeViewBinder.unbind();
         if(mItemRemovedListener != null){
             mItemRemovedListener.onItemRemoved(mSwipeViewBinderList.size());
         }
@@ -619,20 +619,15 @@ public class SwipePlaceHolderView extends FrameLayout implements
     }
 
     public void undoLastSwipe(){
-        if(mIsUndoEnabled && mRestoreResolverOnUndo != null){
-            if(mRestoreResolverPosition >= 0 && mRestoreResolverPosition >= mDisplayViewCount - 1){
-                removeViewAt(mRestoreResolverPosition);
-            }else if(mSwipeViewBinderList.size() >= mDisplayViewCount - 1){
+        if(mIsUndoEnabled && mRestoreSwipeViewBinderList.size() != 0){
+            if(mSwipeViewBinderList.size() >= mDisplayViewCount - 1) {
                 removeViewAt(mDisplayViewCount - 1);
             }
-            addView(mRestoreResolverOnUndo, 0);
-            mRestoreResolverOnUndo = null;
+            addView(mRestoreSwipeViewBinderList.get(mRestoreSwipeViewBinderList.size() - 1).getResolver(), 0);
             if(mSwipeViewBinderList.size() > 1){
                 mSwipeViewBinderList.get(1).blockTouch();
             }
-            if(mRestoreResolverPosition >= 0 && mRestoreResolverPosition >= mDisplayViewCount - 1) {
-                resetViewOrientation(mRestoreResolverPosition, mSwipeDecor);
-            }else{
+            if(mSwipeViewBinderList.size() >= mDisplayViewCount - 1){
                 resetViewOrientation(mDisplayViewCount - 1, mSwipeDecor);
             }
         }
