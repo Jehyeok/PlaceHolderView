@@ -85,6 +85,7 @@ public class SwipeViewBinder<T, V extends FrameLayout> extends ViewBinder<T, V>{
     protected void setOnTouch(){
         bindClick(getResolver(), getLayoutView());
         bindLongPress(getResolver(), getLayoutView());
+
         switch (mSwipeType){
             case SwipePlaceHolderView.SWIPE_TYPE_DEFAULT:
                 setDefaultTouchListener(mLayoutView);
@@ -625,12 +626,7 @@ public class SwipeViewBinder<T, V extends FrameLayout> extends ViewBinder<T, V>{
     }
 
     protected void blockTouch(){
-        mLayoutView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent rawEvent) {
-                return true;
-            }
-        });
+        mLayoutView.setOnTouchListener(null);
     }
 
     /**

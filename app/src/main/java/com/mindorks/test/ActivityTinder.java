@@ -53,6 +53,7 @@ public class ActivityTinder extends AppCompatActivity {
         });
         mSwipView.getBuilder()
 //                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_VERTICAL)
+//                .setDisplayReverse(true)
                 .setDisplayViewCount(3)
                 .setIsUndoEnabled(true)
                 .setWidthSwipeDistFactor(15)
@@ -80,7 +81,7 @@ public class ActivityTinder extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.currentThread().sleep(8000);
+                    Thread.currentThread().sleep(1000);
                     mSwipView.enableTouchSwipe();
 //                    mSwipView.lockViews();
 //                    Thread.currentThread().sleep(4000);
