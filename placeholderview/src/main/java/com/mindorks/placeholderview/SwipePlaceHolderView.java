@@ -631,6 +631,7 @@ public class SwipePlaceHolderView extends FrameLayout implements
 
             if(mSwipeViewBinderList.size() > 1){
                 mSwipeViewBinderList.get(1).blockTouch();
+                mSwipeViewBinderList.get(1).unbindClick();
             }
             if(mSwipeViewBinderList.size() > mDisplayViewCount - 1){
                 resetViewOrientation(mDisplayViewCount - 1, mSwipeDecor);

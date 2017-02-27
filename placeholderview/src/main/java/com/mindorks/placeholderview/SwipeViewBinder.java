@@ -629,6 +629,10 @@ public class SwipeViewBinder<T, V extends FrameLayout> extends ViewBinder<T, V>{
         mLayoutView.setOnTouchListener(null);
     }
 
+    protected void unbindClick(){
+        unbindClick(getResolver(), getLayoutView());
+    }
+
     /**
      *
      * @param v

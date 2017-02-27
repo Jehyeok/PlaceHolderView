@@ -173,6 +173,21 @@ public class ViewBinder<T, V extends android.view.View> {
      * @param resolver
      * @param promptsView
      */
+    protected void unbindClick(final T resolver,final V promptsView){
+        for(final Method method : resolver.getClass().getDeclaredMethods()){
+            Click clickAnnotation = method.getAnnotation(Click.class);
+            if(clickAnnotation != null) {
+                android.view.View view = promptsView.findViewById(clickAnnotation.value());
+                view.setOnClickListener(null);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param resolver
+     * @param promptsView
+     */
     protected void bindLongPress(final T resolver,final V promptsView){
         for(final Method method : resolver.getClass().getDeclaredMethods()){
             LongClick longClickAnnotation = method.getAnnotation(LongClick.class);
