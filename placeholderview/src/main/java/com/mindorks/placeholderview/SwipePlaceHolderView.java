@@ -29,6 +29,7 @@ public class SwipePlaceHolderView extends FrameLayout implements
     public static final int SWIPE_TYPE_HORIZONTAL = 2;
     public static final int SWIPE_TYPE_VERTICAL = 3;
 
+    private List<SwipeViewBinder<Object, FrameView>> mRestoreSwipeViewBinderList;
     private List<SwipeViewBinder<Object, FrameView>> mSwipeViewBinderList;
     private SwipeViewBuilder mSwipeViewBuilder;
     private LayoutInflater mLayoutInflater;
@@ -96,6 +97,7 @@ public class SwipePlaceHolderView extends FrameLayout implements
      */
     private void setupView(List<SwipeViewBinder<Object, FrameView>> swipeViewBinderList,
                            SwipeViewBuilder swipeViewBuilder){
+        mRestoreSwipeViewBinderList = new ArrayList<>();
         mSwipeViewBinderList = swipeViewBinderList;
         mSwipeViewBuilder = swipeViewBuilder;
         mLayoutInflater =  LayoutInflater.from(getContext());
@@ -437,6 +439,7 @@ public class SwipePlaceHolderView extends FrameLayout implements
             mSwipeViewBinderList.get(0).setOnTouch();
         }
         if(mIsUndoEnabled) {
+            mRestoreSwipeViewBinderList.add(swipeViewBinder);
             mRestoreResolverOnUndo = swipeViewBinder.getResolver();
             mRestoreResolverPosition = position;
         }
@@ -618,8 +621,9 @@ public class SwipePlaceHolderView extends FrameLayout implements
     public void undoLastSwipe(){
         if(mIsUndoEnabled && mRestoreResolverOnUndo != null){
             if(mRestoreResolverPosition >= 0 && mRestoreResolverPosition >= mDisplayViewCount - 1){
-                mSwipeViewBinderList.remove(mRestoreResolverPosition);
                 removeViewAt(mRestoreResolverPosition);
+            }else if(mSwipeViewBinderList.size() >= mDisplayViewCount - 1){
+                removeViewAt(mDisplayViewCount - 1);
             }
             addView(mRestoreResolverOnUndo, 0);
             mRestoreResolverOnUndo = null;
@@ -629,7 +633,7 @@ public class SwipePlaceHolderView extends FrameLayout implements
             if(mRestoreResolverPosition >= 0 && mRestoreResolverPosition >= mDisplayViewCount - 1) {
                 resetViewOrientation(mRestoreResolverPosition, mSwipeDecor);
             }else{
-                resetViewOrientation(mRestoreResolverPosition + 1, mSwipeDecor);
+                resetViewOrientation(mDisplayViewCount - 1, mSwipeDecor);
             }
         }
     }
